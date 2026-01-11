@@ -16,9 +16,7 @@ def contextualize_scan_results(results: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def _contextualize_image_scans(trivy_images: Dict[str, Any]):
-    """
-    Dodaje kontekst do skanów obrazów na podstawie konfiguracji kontenerów
-    """
+
     for image_name, image_data in trivy_images.items():
         container_config = image_data.get("container_config", {})
         has_open_ports = _check_for_open_ports(container_config)
