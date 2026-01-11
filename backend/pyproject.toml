@@ -1,0 +1,10 @@
+[project]
+name = "deployment_scanner"
+version = "0.1.0"
+
+[project.scripts]
+scan = "deployment_scanner.cli:scan"
+remediate = "deployment_scanner.cli:remediate"
+
+[tool.black]
+line-length = 79

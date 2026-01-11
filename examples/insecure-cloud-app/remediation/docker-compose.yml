@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+    web:
+        user: root
+        build: .
+        environment:
+            - DEBUG=false  # SECURITY: disable dangerous environment variable
+        privileged: false  # SECURITY: disable privileged mode

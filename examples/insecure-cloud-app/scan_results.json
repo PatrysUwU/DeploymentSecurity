@@ -1,0 +1,954 @@
+{
+    "bandit": {
+        "tool": "bandit",
+        "type": "SAST",
+        "errors": "",
+        "results": [
+            {
+                "Target": "/home/patrys/DeploymentScanner/examples/insecure-cloud-app",
+                "Type": "bandit",
+                "Vulnerabilities": [
+                    {
+                        "VulnerabilityID": "B403",
+                        "Severity": "LOW",
+                        "Description": "Consider possible security implications associated with pickle module.",
+                        "File": "/home/patrys/DeploymentScanner/examples/insecure-cloud-app/backend/dangerous.py",
+                        "Line": 3,
+                        "after_normalizing": {
+                            "weight": 0.25,
+                            "final_scoring": 20,
+                            "severity_score": 20
+                        }
+                    },
+                    {
+                        "VulnerabilityID": "B404",
+                        "Severity": "LOW",
+                        "Description": "Consider possible security implications associated with the subprocess module.",
+                        "File": "/home/patrys/DeploymentScanner/examples/insecure-cloud-app/backend/dangerous.py",
+                        "Line": 4,
+                        "after_normalizing": {
+                            "weight": 0.25,
+                            "final_scoring": 20,
+                            "severity_score": 20
+                        }
+                    },
+                    {
+                        "VulnerabilityID": "B105",
+                        "Severity": "LOW",
+                        "Description": "Possible hardcoded password: 'super_secret_password'",
+                        "File": "/home/patrys/DeploymentScanner/examples/insecure-cloud-app/backend/dangerous.py",
+                        "Line": 7,
+                        "after_normalizing": {
+                            "weight": 0.25,
+                            "final_scoring": 20,
+                            "severity_score": 20
+                        }
+                    },
+                    {
+                        "VulnerabilityID": "B307",
+                        "Severity": "MEDIUM",
+                        "Description": "Use of possibly insecure function - consider using safer ast.literal_eval.",
+                        "File": "/home/patrys/DeploymentScanner/examples/insecure-cloud-app/backend/dangerous.py",
+                        "Line": 12,
+                        "after_normalizing": {
+                            "weight": 0.25,
+                            "final_scoring": 50,
+                            "severity_score": 50
+                        }
+                    },
+                    {
+                        "VulnerabilityID": "B301",
+                        "Severity": "MEDIUM",
+                        "Description": "Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.",
+                        "File": "/home/patrys/DeploymentScanner/examples/insecure-cloud-app/backend/dangerous.py",
+                        "Line": 18,
+                        "after_normalizing": {
+                            "weight": 0.25,
+                            "final_scoring": 50,
+                            "severity_score": 50
+                        }
+                    },
+                    {
+                        "VulnerabilityID": "B602",
+                        "Severity": "HIGH",
+                        "Description": "subprocess call with shell=True identified, security issue.",
+                        "File": "/home/patrys/DeploymentScanner/examples/insecure-cloud-app/backend/dangerous.py",
+                        "Line": 25,
+                        "after_normalizing": {
+                            "weight": 0.25,
+                            "final_scoring": 80,
+                            "severity_score": 80
+                        }
+                    },
+                    {
+                        "VulnerabilityID": "B324",
+                        "Severity": "HIGH",
+                        "Description": "Use of weak MD5 hash for security. Consider usedforsecurity=False",
+                        "File": "/home/patrys/DeploymentScanner/examples/insecure-cloud-app/backend/dangerous.py",
+                        "Line": 30,
+                        "after_normalizing": {
+                            "weight": 0.25,
+                            "final_scoring": 80,
+                            "severity_score": 80
+                        }
+                    },
+                    {
+                        "VulnerabilityID": "B101",
+                        "Severity": "LOW",
+                        "Description": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+                        "File": "/home/patrys/DeploymentScanner/examples/insecure-cloud-app/backend/dangerous.py",
+                        "Line": 35,
+                        "after_normalizing": {
+                            "weight": 0.25,
+                            "final_scoring": 20,
+                            "severity_score": 20
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    "trivy_misconfig": {
+        "tool": "trivy",
+        "type": "MISCONFIG_SCAN",
+        "results": [
+            {
+                "Target": "/home/patrys/DeploymentScanner/examples/insecure-cloud-app",
+                "Type": "misconfig",
+                "Misconfigurations": [
+                    {
+                        "ID": "DS002",
+                        "Severity": "HIGH",
+                        "Title": "Image user should not be 'root'",
+                        "Description": "Running containers with 'root' user can lead to a container escape situation. It is a best practice to run containers as non-root users, which can be done by adding a 'USER' statement to the Dockerfile.",
+                        "Message": "Specify at least 1 USER command in Dockerfile with non-root user as argument",
+                        "Type": "Dockerfile Security Check",
+                        "Status": "FAIL",
+                        "DataSource": "Trivy",
+                        "File": "Dockerfile",
+                        "after_normalizing": {
+                            "weight": 0.35,
+                            "final_scoring": 80,
+                            "severity_score": 80
+                        }
+                    },
+                    {
+                        "ID": "DS026",
+                        "Severity": "LOW",
+                        "Title": "No HEALTHCHECK defined",
+                        "Description": "You should add HEALTHCHECK instruction in your docker container images to perform the health check on running containers.",
+                        "Message": "Add HEALTHCHECK instruction in your Dockerfile",
+                        "Type": "Dockerfile Security Check",
+                        "Status": "FAIL",
+                        "DataSource": "Trivy",
+                        "File": "Dockerfile",
+                        "after_normalizing": {
+                            "weight": 0.35,
+                            "final_scoring": 20,
+                            "severity_score": 20
+                        }
+                    },
+                    {
+                        "ID": "AVD-AWS-0077",
+                        "Severity": "MEDIUM",
+                        "Title": "RDS Cluster and RDS instance should have backup retention longer than default 1 day",
+                        "Description": "RDS backup retention for clusters defaults to 1 day, this may not be enough to identify and respond to an issue. Backup retention periods should be set to a period that is a balance on cost and limiting risk.\n",
+                        "Message": "Instance has very low backup retention period.",
+                        "Type": "Terraform Security Check",
+                        "Status": "FAIL",
+                        "DataSource": "Trivy",
+                        "File": "terraform/main.tf",
+                        "StartLine": 32,
+                        "EndLine": 40,
+                        "after_normalizing": {
+                            "weight": 0.35,
+                            "final_scoring": 50,
+                            "severity_score": 50
+                        }
+                    },
+                    {
+                        "ID": "AVD-AWS-0080",
+                        "Severity": "HIGH",
+                        "Title": "RDS encryption has not been enabled at a DB Instance level.",
+                        "Description": "Encryption should be enabled for an RDS Database instances.\nWhen enabling encryption by setting the kms_key_id.\n",
+                        "Message": "Instance does not have storage encryption enabled.",
+                        "Type": "Terraform Security Check",
+                        "Status": "FAIL",
+                        "DataSource": "Trivy",
+                        "File": "terraform/main.tf",
+                        "StartLine": 32,
+                        "EndLine": 40,
+                        "after_normalizing": {
+                            "weight": 0.35,
+                            "final_scoring": 80,
+                            "severity_score": 80
+                        }
+                    },
+                    {
+                        "ID": "AVD-AWS-0086",
+                        "Severity": "HIGH",
+                        "Title": "S3 Access block should block public ACL",
+                        "Description": "S3 buckets should block public ACLs on buckets and any objects they contain. By blocking, PUTs with fail if the object has any public ACL a.\n",
+                        "Message": "No public access block so not blocking public acls",
+                        "Type": "Terraform Security Check",
+                        "Status": "FAIL",
+                        "DataSource": "Trivy",
+                        "File": "terraform/main.tf",
+                        "StartLine": 23,
+                        "EndLine": 30,
+                        "after_normalizing": {
+                            "weight": 0.35,
+                            "final_scoring": 80,
+                            "severity_score": 80
+                        }
+                    },
+                    {
+                        "ID": "AVD-AWS-0087",
+                        "Severity": "HIGH",
+                        "Title": "S3 Access block should block public policy",
+                        "Description": "S3 bucket policy should have block public policy to prevent users from putting a policy that enable public access.\n",
+                        "Message": "No public access block so not blocking public policies",
+                        "Type": "Terraform Security Check",
+                        "Status": "FAIL",
+                        "DataSource": "Trivy",
+                        "File": "terraform/main.tf",
+                        "StartLine": 23,
+                        "EndLine": 30,
+                        "after_normalizing": {
+                            "weight": 0.35,
+                            "final_scoring": 80,
+                            "severity_score": 80
+                        }
+                    },
+                    {
+                        "ID": "AVD-AWS-0088",
+                        "Severity": "HIGH",
+                        "Title": "Unencrypted S3 bucket.",
+                        "Description": "S3 Buckets should be encrypted to protect the data that is stored within them if access is compromised.\n",
+                        "Message": "Bucket does not have encryption enabled",
+                        "Type": "Terraform Security Check",
+                        "Status": "FAIL",
+                        "DataSource": "Trivy",
+                        "File": "terraform/main.tf",
+                        "StartLine": 23,
+                        "EndLine": 30,
+                        "after_normalizing": {
+                            "weight": 0.35,
+                            "final_scoring": 80,
+                            "severity_score": 80
+                        }
+                    },
+                    {
+                        "ID": "s3-bucket-logging",
+                        "Severity": "LOW",
+                        "Title": "S3 Bucket Logging",
+                        "Description": "Ensures S3 bucket logging is enabled for S3 buckets",
+                        "Message": "Bucket has logging disabled",
+                        "Type": "Terraform Security Check",
+                        "Status": "FAIL",
+                        "DataSource": "Trivy",
+                        "File": "terraform/main.tf",
+                        "StartLine": 23,
+                        "EndLine": 30,
+                        "after_normalizing": {
+                            "weight": 0.35,
+                            "final_scoring": 20,
+                            "severity_score": 20
+                        }
+                    },
+                    {
+                        "ID": "AVD-AWS-0091",
+                        "Severity": "HIGH",
+                        "Title": "S3 Access Block should Ignore Public ACL",
+                        "Description": "S3 buckets should ignore public ACLs on buckets and any objects they contain. By ignoring rather than blocking, PUT calls with public ACLs will still be applied but the ACL will be ignored.\n",
+                        "Message": "No public access block so not blocking public acls",
+                        "Type": "Terraform Security Check",
+                        "Status": "FAIL",
+                        "DataSource": "Trivy",
+                        "File": "terraform/main.tf",
+                        "StartLine": 23,
+                        "EndLine": 30,
+                        "after_normalizing": {
+                            "weight": 0.35,
+                            "final_scoring": 80,
+                            "severity_score": 80
+                        }
+                    },
+                    {
+                        "ID": "AVD-AWS-0092",
+                        "Severity": "HIGH",
+                        "Title": "S3 Buckets not publicly accessible through ACL.",
+                        "Description": "Buckets should not have ACLs that allow public access\n",
+                        "Message": "Bucket has a public ACL: \"public-read\"",
+                        "Type": "Terraform Security Check",
+                        "Status": "FAIL",
+                        "DataSource": "Trivy",
+                        "File": "terraform/main.tf",
+                        "StartLine": 26,
+                        "EndLine": 26,
+                        "after_normalizing": {
+                            "weight": 0.35,
+                            "final_scoring": 80,
+                            "severity_score": 80
+                        }
+                    },
+                    {
+                        "ID": "AVD-AWS-0093",
+                        "Severity": "HIGH",
+                        "Title": "S3 Access block should restrict public bucket to limit access",
+                        "Description": "S3 buckets should restrict public policies for the bucket. By enabling, the restrict_public_buckets, only the bucket owner and AWS Services can access if it has a public policy.\n",
+                        "Message": "No public access block so not restricting public buckets",
+                        "Type": "Terraform Security Check",
+                        "Status": "FAIL",
+                        "DataSource": "Trivy",
+                        "File": "terraform/main.tf",
+                        "StartLine": 23,
+                        "EndLine": 30,
+                        "after_normalizing": {
+                            "weight": 0.35,
+                            "final_scoring": 80,
+                            "severity_score": 80
+                        }
+                    },
+                    {
+                        "ID": "AVD-AWS-0094",
+                        "Severity": "LOW",
+                        "Title": "S3 buckets should each define an aws_s3_bucket_public_access_block",
+                        "Description": "The \"block public access\" settings in S3 override individual policies that apply to a given bucket, meaning that all public access can be controlled in one central types for that bucket. It is therefore good practice to define these settings for each bucket in order to clearly define the public access that can be allowed for it.\n",
+                        "Message": "Bucket does not have a corresponding public access block.",
+                        "Type": "Terraform Security Check",
+                        "Status": "FAIL",
+                        "DataSource": "Trivy",
+                        "File": "terraform/main.tf",
+                        "StartLine": 23,
+                        "EndLine": 30,
+                        "after_normalizing": {
+                            "weight": 0.35,
+                            "final_scoring": 20,
+                            "severity_score": 20
+                        }
+                    },
+                    {
+                        "ID": "aws-vpc-add-description-to-security-group",
+                        "Severity": "LOW",
+                        "Title": "Missing description for security group.",
+                        "Description": "Security groups should include a description for auditing purposes.\n\nSimplifies auditing, debugging, and managing security groups.\n",
+                        "Message": "Security group explicitly uses the default description.",
+                        "Type": "Terraform Security Check",
+                        "Status": "FAIL",
+                        "DataSource": "Trivy",
+                        "File": "terraform/main.tf",
+                        "StartLine": 5,
+                        "EndLine": 21,
+                        "after_normalizing": {
+                            "weight": 0.35,
+                            "final_scoring": 20,
+                            "severity_score": 20
+                        }
+                    },
+                    {
+                        "ID": "aws-vpc-no-public-egress-sgr",
+                        "Severity": "CRITICAL",
+                        "Title": "A security group rule should not allow unrestricted egress to any IP address.",
+                        "Description": "Opening up ports to connect out to the public internet is generally to be avoided. You should restrict access to IP addresses or ranges that are explicitly required where possible.\n",
+                        "Message": "Security group rule allows unrestricted egress to any IP address.",
+                        "Type": "Terraform Security Check",
+                        "Status": "FAIL",
+                        "DataSource": "Trivy",
+                        "File": "terraform/main.tf",
+                        "StartLine": 19,
+                        "EndLine": 19,
+                        "after_normalizing": {
+                            "weight": 0.35,
+                            "final_scoring": 100,
+                            "severity_score": 100
+                        }
+                    },
+                    {
+                        "ID": "AVD-AWS-0107",
+                        "Severity": "HIGH",
+                        "Title": "Security groups should not allow unrestricted ingress to SSH or RDP from any IP address.",
+                        "Description": "Security groups provide stateful filtering of ingress and egress network traffic to AWS\nresources. It is recommended that no security group allows unrestricted ingress access to\nremote server administration ports, such as SSH to port 22 and RDP to port 3389.\n",
+                        "Message": "Security group rule allows unrestricted ingress from any IP address.",
+                        "Type": "Terraform Security Check",
+                        "Status": "FAIL",
+                        "DataSource": "Trivy",
+                        "File": "terraform/main.tf",
+                        "StartLine": 12,
+                        "EndLine": 12,
+                        "after_normalizing": {
+                            "weight": 0.35,
+                            "final_scoring": 80,
+                            "severity_score": 80
+                        }
+                    },
+                    {
+                        "ID": "aws-vpc-add-description-to-security-group-rule",
+                        "Severity": "LOW",
+                        "Title": "Missing description for security group rule.",
+                        "Description": "Security group rules should include a description for auditing purposes.\n\nSimplifies auditing, debugging, and managing security groups.\n",
+                        "Message": "Security group rule does not have a description.",
+                        "Type": "Terraform Security Check",
+                        "Status": "FAIL",
+                        "DataSource": "Trivy",
+                        "File": "terraform/main.tf",
+                        "StartLine": 8,
+                        "EndLine": 13,
+                        "after_normalizing": {
+                            "weight": 0.35,
+                            "final_scoring": 20,
+                            "severity_score": 20
+                        }
+                    },
+                    {
+                        "ID": "aws-vpc-add-description-to-security-group-rule",
+                        "Severity": "LOW",
+                        "Title": "Missing description for security group rule.",
+                        "Description": "Security group rules should include a description for auditing purposes.\n\nSimplifies auditing, debugging, and managing security groups.\n",
+                        "Message": "Security group rule does not have a description.",
+                        "Type": "Terraform Security Check",
+                        "Status": "FAIL",
+                        "DataSource": "Trivy",
+                        "File": "terraform/main.tf",
+                        "StartLine": 15,
+                        "EndLine": 20,
+                        "after_normalizing": {
+                            "weight": 0.35,
+                            "final_scoring": 20,
+                            "severity_score": 20
+                        }
+                    },
+                    {
+                        "ID": "AVD-AWS-0132",
+                        "Severity": "HIGH",
+                        "Title": "S3 encryption should use Customer Managed Keys",
+                        "Description": "Encryption using AWS keys provides protection for your S3 buckets. To increase control of the encryption and manage factors like rotation use customer managed keys.\n",
+                        "Message": "Bucket does not encrypt data with a customer managed key.",
+                        "Type": "Terraform Security Check",
+                        "Status": "FAIL",
+                        "DataSource": "Trivy",
+                        "File": "terraform/main.tf",
+                        "StartLine": 23,
+                        "EndLine": 30,
+                        "after_normalizing": {
+                            "weight": 0.35,
+                            "final_scoring": 80,
+                            "severity_score": 80
+                        }
+                    },
+                    {
+                        "ID": "AVD-AWS-0133",
+                        "Severity": "LOW",
+                        "Title": "Enable Performance Insights to detect potential problems",
+                        "Description": "Enabling Performance insights allows for greater depth in monitoring data.\nFor example, information about active sessions could help diagose a compromise or assist in the investigation\n",
+                        "Message": "Instance does not have performance insights enabled.",
+                        "Type": "Terraform Security Check",
+                        "Status": "FAIL",
+                        "DataSource": "Trivy",
+                        "File": "terraform/main.tf",
+                        "StartLine": 32,
+                        "EndLine": 40,
+                        "after_normalizing": {
+                            "weight": 0.35,
+                            "final_scoring": 20,
+                            "severity_score": 20
+                        }
+                    },
+                    {
+                        "ID": "AVD-AWS-0176",
+                        "Severity": "MEDIUM",
+                        "Title": "RDS IAM Database Authentication Disabled",
+                        "Description": "Ensure IAM Database Authentication is enabled for RDS database instances to manage database access",
+                        "Message": "Instance does not have IAM Authentication enabled",
+                        "Type": "Terraform Security Check",
+                        "Status": "FAIL",
+                        "DataSource": "Trivy",
+                        "File": "terraform/main.tf",
+                        "StartLine": 32,
+                        "EndLine": 40,
+                        "after_normalizing": {
+                            "weight": 0.35,
+                            "final_scoring": 50,
+                            "severity_score": 50
+                        }
+                    },
+                    {
+                        "ID": "AVD-AWS-0177",
+                        "Severity": "MEDIUM",
+                        "Title": "RDS Deletion Protection Disabled",
+                        "Description": "Ensure deletion protection is enabled for RDS database instances.",
+                        "Message": "Instance does not have Deletion Protection enabled",
+                        "Type": "Terraform Security Check",
+                        "Status": "FAIL",
+                        "DataSource": "Trivy",
+                        "File": "terraform/main.tf",
+                        "StartLine": 32,
+                        "EndLine": 40,
+                        "after_normalizing": {
+                            "weight": 0.35,
+                            "final_scoring": 50,
+                            "severity_score": 50
+                        }
+                    },
+                    {
+                        "ID": "AVD-AWS-0180",
+                        "Severity": "HIGH",
+                        "Title": "RDS Publicly Accessible",
+                        "Description": "Ensures RDS instances and RDS Cluster instances are not launched into the public cloud.",
+                        "Message": "Instance has Public Access enabled",
+                        "Type": "Terraform Security Check",
+                        "Status": "FAIL",
+                        "DataSource": "Trivy",
+                        "File": "terraform/main.tf",
+                        "StartLine": 38,
+                        "EndLine": 38,
+                        "after_normalizing": {
+                            "weight": 0.35,
+                            "final_scoring": 80,
+                            "severity_score": 80
+                        }
+                    }
+                ]
+            }
+        ],
+        "errors": "2026-01-10T14:12:45+01:00\tINFO\t[misconfig] Misconfiguration scanning is enabled\n2026-01-10T14:12:46+01:00\tINFO\t[terraform scanner] Scanning root module\tfile_path=\"terraform\"\n2026-01-10T14:12:46+01:00\tINFO\tNumber of language-specific files\tnum=2\n2026-01-10T14:12:46+01:00\tINFO\tDetected config files\tnum=3\n"
+    },
+    "docker_compose_security": {
+        "tool": "docker_compose_scanner",
+        "type": "MISCONFIG_SCAN",
+        "results": [
+            {
+                "Target": "/home/patrys/DeploymentScanner/examples/insecure-cloud-app",
+                "Type": "docker_compose_security",
+                "Vulnerabilities": [
+                    {
+                        "id": "COMPOSE_PRIVILEGED",
+                        "severity": "HIGH",
+                        "title": "Container running in privileged mode",
+                        "description": "Container has full access to host system",
+                        "recommendation": "Remove 'privileged: true' and use specific capabilities instead",
+                        "service_name": "web",
+                        "compose_file": "/home/patrys/DeploymentScanner/examples/insecure-cloud-app/docker-compose.yml"
+                    },
+                    {
+                        "id": "COMPOSE_DANGEROUS_ENV",
+                        "severity": "MEDIUM",
+                        "title": "Dangerous environment variable: DEBUG",
+                        "description": "Environment variable DEBUG=true may pose security risk",
+                        "recommendation": "Remove or set to secure value in production",
+                        "service_name": "web",
+                        "compose_file": "/home/patrys/DeploymentScanner/examples/insecure-cloud-app/docker-compose.yml"
+                    },
+                    {
+                        "id": "COMPOSE_ROOT_USER",
+                        "severity": "CRITICAL",
+                        "title": "Container running as root user",
+                        "description": "Container processes run with root privileges",
+                        "recommendation": "Create and use non-root user",
+                        "service_name": "web",
+                        "compose_file": "/home/patrys/DeploymentScanner/examples/insecure-cloud-app/docker-compose.yml"
+                    }
+                ]
+            }
+        ],
+        "errors": ""
+    },
+    "trivy_images": {
+        "dependencies": {
+            "tool": "trivy",
+            "type": "DEPENDENCY_SCAN",
+            "results": [],
+            "errors": ""
+        },
+        "python:3.13.7-alpine": {
+            "tool": "trivy",
+            "type": "IMAGE_SCAN",
+            "results": [
+                {
+                    "Target": "python:3.13.7-alpine",
+                    "Type": "image",
+                    "Vulnerabilities": [
+                        {
+                            "VulnerabilityID": "CVE-2024-58251",
+                            "Severity": "MEDIUM",
+                            "Title": "In netstat in BusyBox through 1.37.0, local users can launch of networ ...",
+                            "Description": "In netstat in BusyBox through 1.37.0, local users can launch of network application with an argv[0] containing an ANSI terminal escape sequence, leading to a denial of service (terminal locked up) when netstat is used by a victim.",
+                            "Package": "busybox",
+                            "InstalledVersion": "1.37.0-r18",
+                            "FixedVersion": "1.37.0-r20",
+                            "CVSS": {},
+                            "DataSource": "Trivy",
+                            "PublishedDate": "2025-04-23T18:16:03.057Z",
+                            "LastModifiedDate": "2025-04-29T13:52:47.47Z",
+                            "after_normalizing": {
+                                "weight": 0.4,
+                                "final_scoring": 50.0,
+                                "cvss_score": 5.0
+                            },
+                            "context_wage": 1.0
+                        },
+                        {
+                            "VulnerabilityID": "CVE-2025-46394",
+                            "Severity": "LOW",
+                            "Title": "In tar in BusyBox through 1.37.0, a TAR archive can have filenames hid ...",
+                            "Description": "In tar in BusyBox through 1.37.0, a TAR archive can have filenames hidden from a listing through the use of terminal escape sequences.",
+                            "Package": "busybox",
+                            "InstalledVersion": "1.37.0-r18",
+                            "FixedVersion": "1.37.0-r20",
+                            "CVSS": {
+                                "nvd": {
+                                    "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+                                    "V3Score": 3.3
+                                }
+                            },
+                            "DataSource": "Trivy",
+                            "PublishedDate": "2025-04-23T16:15:48.713Z",
+                            "LastModifiedDate": "2025-09-24T14:38:22.127Z",
+                            "after_normalizing": {
+                                "weight": 0.4,
+                                "final_scoring": 33.0,
+                                "cvss_score": 3.3
+                            },
+                            "context_wage": 1.0
+                        },
+                        {
+                            "VulnerabilityID": "CVE-2024-58251",
+                            "Severity": "MEDIUM",
+                            "Title": "In netstat in BusyBox through 1.37.0, local users can launch of networ ...",
+                            "Description": "In netstat in BusyBox through 1.37.0, local users can launch of network application with an argv[0] containing an ANSI terminal escape sequence, leading to a denial of service (terminal locked up) when netstat is used by a victim.",
+                            "Package": "busybox-binsh",
+                            "InstalledVersion": "1.37.0-r18",
+                            "FixedVersion": "1.37.0-r20",
+                            "CVSS": {},
+                            "DataSource": "Trivy",
+                            "PublishedDate": "2025-04-23T18:16:03.057Z",
+                            "LastModifiedDate": "2025-04-29T13:52:47.47Z",
+                            "after_normalizing": {
+                                "weight": 0.4,
+                                "final_scoring": 50.0,
+                                "cvss_score": 5.0
+                            },
+                            "context_wage": 1.0
+                        },
+                        {
+                            "VulnerabilityID": "CVE-2025-46394",
+                            "Severity": "LOW",
+                            "Title": "In tar in BusyBox through 1.37.0, a TAR archive can have filenames hid ...",
+                            "Description": "In tar in BusyBox through 1.37.0, a TAR archive can have filenames hidden from a listing through the use of terminal escape sequences.",
+                            "Package": "busybox-binsh",
+                            "InstalledVersion": "1.37.0-r18",
+                            "FixedVersion": "1.37.0-r20",
+                            "CVSS": {
+                                "nvd": {
+                                    "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+                                    "V3Score": 3.3
+                                }
+                            },
+                            "DataSource": "Trivy",
+                            "PublishedDate": "2025-04-23T16:15:48.713Z",
+                            "LastModifiedDate": "2025-09-24T14:38:22.127Z",
+                            "after_normalizing": {
+                                "weight": 0.4,
+                                "final_scoring": 33.0,
+                                "cvss_score": 3.3
+                            },
+                            "context_wage": 1.0
+                        },
+                        {
+                            "VulnerabilityID": "CVE-2025-9230",
+                            "Severity": "MEDIUM",
+                            "Title": "openssl: Out-of-bounds read & write in RFC 3211 KEK Unwrap",
+                            "Description": "Issue summary: An application trying to decrypt CMS messages encrypted using\npassword based encryption can trigger an out-of-bounds read and write.\n\nImpact summary: This out-of-bounds read may trigger a crash which leads to\nDenial of Service for an application. The out-of-bounds write can cause\na memory corruption which can have various consequences including\na Denial of Service or Execution of attacker-supplied code.\n\nAlthough the consequences of a successful exploit of this vulnerability\ncould be severe, the probability that the attacker would be able to\nperform it is low. Besides, password based (PWRI) encryption support in CMS\nmessages is very rarely used. For that reason the issue was assessed as\nModerate severity according to our Security Policy.\n\nThe FIPS modules in 3.5, 3.4, 3.3, 3.2, 3.1 and 3.0 are not affected by this\nissue, as the CMS implementation is outside the OpenSSL FIPS module\nboundary.",
+                            "Package": "libcrypto3",
+                            "InstalledVersion": "3.5.1-r0",
+                            "FixedVersion": "3.5.4-r0",
+                            "CVSS": {
+                                "redhat": {
+                                    "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
+                                    "V3Score": 5.6
+                                }
+                            },
+                            "DataSource": "Trivy",
+                            "PublishedDate": "2025-09-30T14:15:41.05Z",
+                            "LastModifiedDate": "2025-11-04T22:16:45.36Z",
+                            "after_normalizing": {
+                                "weight": 0.4,
+                                "final_scoring": 56.0,
+                                "cvss_score": 5.6
+                            },
+                            "context_wage": 0.1
+                        },
+                        {
+                            "VulnerabilityID": "CVE-2025-9231",
+                            "Severity": "MEDIUM",
+                            "Title": "openssl: Timing side-channel in SM2 algorithm on 64 bit ARM",
+                            "Description": "Issue summary: A timing side-channel which could potentially allow remote\nrecovery of the private key exists in the SM2 algorithm implementation on 64 bit\nARM platforms.\n\nImpact summary: A timing side-channel in SM2 signature computations on 64 bit\nARM platforms could allow recovering the private key by an attacker..\n\nWhile remote key recovery over a network was not attempted by the reporter,\ntiming measurements revealed a timing signal which may allow such an attack.\n\nOpenSSL does not directly support certificates with SM2 keys in TLS, and so\nthis CVE is not relevant in most TLS contexts.  However, given that it is\npossible to add support for such certificates via a custom provider, coupled\nwith the fact that in such a custom provider context the private key may be\nrecoverable via remote timing measurements, we consider this to be a Moderate\nseverity issue.\n\nThe FIPS modules in 3.5, 3.4, 3.3, 3.2, 3.1 and 3.0 are not affected by this\nissue, as SM2 is not an approved algorithm.",
+                            "Package": "libcrypto3",
+                            "InstalledVersion": "3.5.1-r0",
+                            "FixedVersion": "3.5.4-r0",
+                            "CVSS": {
+                                "redhat": {
+                                    "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
+                                    "V3Score": 5.9
+                                }
+                            },
+                            "DataSource": "Trivy",
+                            "PublishedDate": "2025-09-30T14:15:41.19Z",
+                            "LastModifiedDate": "2025-11-04T22:16:45.49Z",
+                            "after_normalizing": {
+                                "weight": 0.4,
+                                "final_scoring": 59.0,
+                                "cvss_score": 5.9
+                            },
+                            "context_wage": 0.1
+                        },
+                        {
+                            "VulnerabilityID": "CVE-2025-9232",
+                            "Severity": "LOW",
+                            "Title": "openssl: Out-of-bounds read in HTTP client no_proxy handling",
+                            "Description": "Issue summary: An application using the OpenSSL HTTP client API functions may\ntrigger an out-of-bounds read if the 'no_proxy' environment variable is set and\nthe host portion of the authority component of the HTTP URL is an IPv6 address.\n\nImpact summary: An out-of-bounds read can trigger a crash which leads to\nDenial of Service for an application.\n\nThe OpenSSL HTTP client API functions can be used directly by applications\nbut they are also used by the OCSP client functions and CMP (Certificate\nManagement Protocol) client implementation in OpenSSL. However the URLs used\nby these implementations are unlikely to be controlled by an attacker.\n\nIn this vulnerable code the out of bounds read can only trigger a crash.\nFurthermore the vulnerability requires an attacker-controlled URL to be\npassed from an application to the OpenSSL function and the user has to have\na 'no_proxy' environment variable set. For the aforementioned reasons the\nissue was assessed as Low severity.\n\nThe vulnerable code was introduced in the following patch releases:\n3.0.16, 3.1.8, 3.2.4, 3.3.3, 3.4.0 and 3.5.0.\n\nThe FIPS modules in 3.5, 3.4, 3.3, 3.2, 3.1 and 3.0 are not affected by this\nissue, as the HTTP client implementation is outside the OpenSSL FIPS module\nboundary.",
+                            "Package": "libcrypto3",
+                            "InstalledVersion": "3.5.1-r0",
+                            "FixedVersion": "3.5.4-r0",
+                            "CVSS": {
+                                "redhat": {
+                                    "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:N/I:N/A:L",
+                                    "V3Score": 3.1
+                                }
+                            },
+                            "DataSource": "Trivy",
+                            "PublishedDate": "2025-09-30T14:15:41.313Z",
+                            "LastModifiedDate": "2025-11-04T22:16:45.63Z",
+                            "after_normalizing": {
+                                "weight": 0.4,
+                                "final_scoring": 31.0,
+                                "cvss_score": 3.1
+                            },
+                            "context_wage": 0.1
+                        },
+                        {
+                            "VulnerabilityID": "CVE-2025-9230",
+                            "Severity": "MEDIUM",
+                            "Title": "openssl: Out-of-bounds read & write in RFC 3211 KEK Unwrap",
+                            "Description": "Issue summary: An application trying to decrypt CMS messages encrypted using\npassword based encryption can trigger an out-of-bounds read and write.\n\nImpact summary: This out-of-bounds read may trigger a crash which leads to\nDenial of Service for an application. The out-of-bounds write can cause\na memory corruption which can have various consequences including\na Denial of Service or Execution of attacker-supplied code.\n\nAlthough the consequences of a successful exploit of this vulnerability\ncould be severe, the probability that the attacker would be able to\nperform it is low. Besides, password based (PWRI) encryption support in CMS\nmessages is very rarely used. For that reason the issue was assessed as\nModerate severity according to our Security Policy.\n\nThe FIPS modules in 3.5, 3.4, 3.3, 3.2, 3.1 and 3.0 are not affected by this\nissue, as the CMS implementation is outside the OpenSSL FIPS module\nboundary.",
+                            "Package": "libssl3",
+                            "InstalledVersion": "3.5.1-r0",
+                            "FixedVersion": "3.5.4-r0",
+                            "CVSS": {
+                                "redhat": {
+                                    "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
+                                    "V3Score": 5.6
+                                }
+                            },
+                            "DataSource": "Trivy",
+                            "PublishedDate": "2025-09-30T14:15:41.05Z",
+                            "LastModifiedDate": "2025-11-04T22:16:45.36Z",
+                            "after_normalizing": {
+                                "weight": 0.4,
+                                "final_scoring": 56.0,
+                                "cvss_score": 5.6
+                            },
+                            "context_wage": 0.1
+                        },
+                        {
+                            "VulnerabilityID": "CVE-2025-9231",
+                            "Severity": "MEDIUM",
+                            "Title": "openssl: Timing side-channel in SM2 algorithm on 64 bit ARM",
+                            "Description": "Issue summary: A timing side-channel which could potentially allow remote\nrecovery of the private key exists in the SM2 algorithm implementation on 64 bit\nARM platforms.\n\nImpact summary: A timing side-channel in SM2 signature computations on 64 bit\nARM platforms could allow recovering the private key by an attacker..\n\nWhile remote key recovery over a network was not attempted by the reporter,\ntiming measurements revealed a timing signal which may allow such an attack.\n\nOpenSSL does not directly support certificates with SM2 keys in TLS, and so\nthis CVE is not relevant in most TLS contexts.  However, given that it is\npossible to add support for such certificates via a custom provider, coupled\nwith the fact that in such a custom provider context the private key may be\nrecoverable via remote timing measurements, we consider this to be a Moderate\nseverity issue.\n\nThe FIPS modules in 3.5, 3.4, 3.3, 3.2, 3.1 and 3.0 are not affected by this\nissue, as SM2 is not an approved algorithm.",
+                            "Package": "libssl3",
+                            "InstalledVersion": "3.5.1-r0",
+                            "FixedVersion": "3.5.4-r0",
+                            "CVSS": {
+                                "redhat": {
+                                    "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
+                                    "V3Score": 5.9
+                                }
+                            },
+                            "DataSource": "Trivy",
+                            "PublishedDate": "2025-09-30T14:15:41.19Z",
+                            "LastModifiedDate": "2025-11-04T22:16:45.49Z",
+                            "after_normalizing": {
+                                "weight": 0.4,
+                                "final_scoring": 59.0,
+                                "cvss_score": 5.9
+                            },
+                            "context_wage": 0.1
+                        },
+                        {
+                            "VulnerabilityID": "CVE-2025-9232",
+                            "Severity": "LOW",
+                            "Title": "openssl: Out-of-bounds read in HTTP client no_proxy handling",
+                            "Description": "Issue summary: An application using the OpenSSL HTTP client API functions may\ntrigger an out-of-bounds read if the 'no_proxy' environment variable is set and\nthe host portion of the authority component of the HTTP URL is an IPv6 address.\n\nImpact summary: An out-of-bounds read can trigger a crash which leads to\nDenial of Service for an application.\n\nThe OpenSSL HTTP client API functions can be used directly by applications\nbut they are also used by the OCSP client functions and CMP (Certificate\nManagement Protocol) client implementation in OpenSSL. However the URLs used\nby these implementations are unlikely to be controlled by an attacker.\n\nIn this vulnerable code the out of bounds read can only trigger a crash.\nFurthermore the vulnerability requires an attacker-controlled URL to be\npassed from an application to the OpenSSL function and the user has to have\na 'no_proxy' environment variable set. For the aforementioned reasons the\nissue was assessed as Low severity.\n\nThe vulnerable code was introduced in the following patch releases:\n3.0.16, 3.1.8, 3.2.4, 3.3.3, 3.4.0 and 3.5.0.\n\nThe FIPS modules in 3.5, 3.4, 3.3, 3.2, 3.1 and 3.0 are not affected by this\nissue, as the HTTP client implementation is outside the OpenSSL FIPS module\nboundary.",
+                            "Package": "libssl3",
+                            "InstalledVersion": "3.5.1-r0",
+                            "FixedVersion": "3.5.4-r0",
+                            "CVSS": {
+                                "redhat": {
+                                    "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:N/I:N/A:L",
+                                    "V3Score": 3.1
+                                }
+                            },
+                            "DataSource": "Trivy",
+                            "PublishedDate": "2025-09-30T14:15:41.313Z",
+                            "LastModifiedDate": "2025-11-04T22:16:45.63Z",
+                            "after_normalizing": {
+                                "weight": 0.4,
+                                "final_scoring": 31.0,
+                                "cvss_score": 3.1
+                            },
+                            "context_wage": 0.1
+                        },
+                        {
+                            "VulnerabilityID": "CVE-2024-58251",
+                            "Severity": "MEDIUM",
+                            "Title": "In netstat in BusyBox through 1.37.0, local users can launch of networ ...",
+                            "Description": "In netstat in BusyBox through 1.37.0, local users can launch of network application with an argv[0] containing an ANSI terminal escape sequence, leading to a denial of service (terminal locked up) when netstat is used by a victim.",
+                            "Package": "ssl_client",
+                            "InstalledVersion": "1.37.0-r18",
+                            "FixedVersion": "1.37.0-r20",
+                            "CVSS": {},
+                            "DataSource": "Trivy",
+                            "PublishedDate": "2025-04-23T18:16:03.057Z",
+                            "LastModifiedDate": "2025-04-29T13:52:47.47Z",
+                            "after_normalizing": {
+                                "weight": 0.4,
+                                "final_scoring": 50.0,
+                                "cvss_score": 5.0
+                            },
+                            "context_wage": 1.0
+                        },
+                        {
+                            "VulnerabilityID": "CVE-2025-46394",
+                            "Severity": "LOW",
+                            "Title": "In tar in BusyBox through 1.37.0, a TAR archive can have filenames hid ...",
+                            "Description": "In tar in BusyBox through 1.37.0, a TAR archive can have filenames hidden from a listing through the use of terminal escape sequences.",
+                            "Package": "ssl_client",
+                            "InstalledVersion": "1.37.0-r18",
+                            "FixedVersion": "1.37.0-r20",
+                            "CVSS": {
+                                "nvd": {
+                                    "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+                                    "V3Score": 3.3
+                                }
+                            },
+                            "DataSource": "Trivy",
+                            "PublishedDate": "2025-04-23T16:15:48.713Z",
+                            "LastModifiedDate": "2025-09-24T14:38:22.127Z",
+                            "after_normalizing": {
+                                "weight": 0.4,
+                                "final_scoring": 33.0,
+                                "cvss_score": 3.3
+                            },
+                            "context_wage": 1.0
+                        },
+                        {
+                            "VulnerabilityID": "CVE-2025-8869",
+                            "Severity": "MEDIUM",
+                            "Title": "pip: pip missing checks on symbolic link extraction",
+                            "Description": "When extracting a tar archive pip may not check symbolic links point into the extraction directory if the tarfile module doesn't implement PEP 706.\nNote that upgrading pip to a \"fixed\" version for this vulnerability doesn't fix all known vulnerabilities that are remediated by using a Python version that implements PEP 706.\n\nNote that this is a vulnerability in pip's fallback implementation of tar extraction for Python versions that don't implement PEP 706\nand therefore are not secure to all vulnerabilities in the Python 'tarfile' module. If you're using a Python version that implements PEP 706\nthen pip doesn't use the \"vulnerable\" fallback code.\n\nMitigations include upgrading to a version of pip that includes the fix, upgrading to a Python version that implements PEP 706 (Python >=3.9.17, >=3.10.12, >=3.11.4, or >=3.12),\napplying the linked patch, or inspecting source distributions (sdists) before installation as is already a best-practice.",
+                            "Package": "pip",
+                            "InstalledVersion": "25.2",
+                            "FixedVersion": "25.3",
+                            "CVSS": {
+                                "redhat": {
+                                    "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:N/I:H/A:N",
+                                    "V3Score": 5.3
+                                }
+                            },
+                            "DataSource": "Trivy",
+                            "PublishedDate": "2025-09-24T15:15:41.293Z",
+                            "LastModifiedDate": "2025-11-03T18:17:02.783Z",
+                            "after_normalizing": {
+                                "weight": 0.4,
+                                "final_scoring": 53.0,
+                                "cvss_score": 5.3
+                            },
+                            "context_wage": 0.1
+                        }
+                    ]
+                }
+            ],
+            "errors": "2026-01-10T14:12:46+01:00\tINFO\t[vuln] Vulnerability scanning is enabled\n2026-01-10T14:12:46+01:00\tINFO\t[secret] Secret scanning is enabled\n2026-01-10T14:12:46+01:00\tINFO\t[secret] If your scanning is slow, please try '--scanners vuln' to disable secret scanning\n2026-01-10T14:12:46+01:00\tINFO\t[secret] Please see https://trivy.dev/docs/v0.68/guide/scanner/secret#recommendation for faster secret detection\n2026-01-10T14:12:48+01:00\tINFO\tDetected OS\tfamily=\"alpine\" version=\"3.22.1\"\n2026-01-10T14:12:48+01:00\tINFO\t[alpine] Detecting vulnerabilities...\tos_version=\"3.22\" repository=\"3.22\" pkg_num=29\n2026-01-10T14:12:48+01:00\tINFO\tNumber of language-specific files\tnum=1\n2026-01-10T14:12:48+01:00\tINFO\t[python-pkg] Detecting vulnerabilities...\n2026-01-10T14:12:48+01:00\tWARN\tUsing severities from other vendors for some vulnerabilities. Read https://trivy.dev/docs/v0.68/guide/scanner/vulnerability#severity-selection for details.\n",
+            "container_config": {
+                "service_name": "web",
+                "image": "custom",
+                "ports": [],
+                "environment": {
+                    "DEBUG": "true"
+                },
+                "volumes": [],
+                "build_context": ".",
+                "dockerfile": "Dockerfile",
+                "depends_on": [],
+                "command": null,
+                "source_files": [
+                    {
+                        "path": "backend/dangerous.py",
+                        "full_path": "/home/patrys/DeploymentScanner/examples/insecure-cloud-app/backend/dangerous.py",
+                        "extension": ".py",
+                        "size": 1025
+                    },
+                    {
+                        "path": "docker-compose.yml",
+                        "full_path": "/home/patrys/DeploymentScanner/examples/insecure-cloud-app/docker-compose.yml",
+                        "extension": ".yml",
+                        "size": 142
+                    },
+                    {
+                        "path": "scan_results.json",
+                        "full_path": "/home/patrys/DeploymentScanner/examples/insecure-cloud-app/scan_results.json",
+                        "extension": ".json",
+                        "size": 59367
+                    },
+                    {
+                        "path": "frontend/package-lock.json",
+                        "full_path": "/home/patrys/DeploymentScanner/examples/insecure-cloud-app/frontend/package-lock.json",
+                        "extension": ".json",
+                        "size": 10245
+                    },
+                    {
+                        "path": "frontend/package.json",
+                        "full_path": "/home/patrys/DeploymentScanner/examples/insecure-cloud-app/frontend/package.json",
+                        "extension": ".json",
+                        "size": 274
+                    }
+                ],
+                "mounted_code": [],
+                "dockerfile_instructions": [
+                    {
+                        "type": "COPY",
+                        "source": ".",
+                        "destination": ".",
+                        "line": 6,
+                        "instruction": "COPY . ."
+                    }
+                ]
+            }
+        }
+    },
+    "summary": {
+        "total_scans": 5,
+        "bandit_issues": 8,
+        "trivy_misconfig_issues": 22,
+        "trivy_image_vulnerabilities": 13,
+        "trivy_dependency_vulnerabilities": 0,
+        "docker_compose_security_issues": 0,
+        "scanned_images": 1,
+        "scanned_dependency_files": 0,
+        "severity_breakdown": {
+            "critical": 1,
+            "high": 13,
+            "medium": 13,
+            "low": 16,
+            "unknown": 0
+        },
+        "total_issues": 43,
+        "risk_scores": {
+            "bandit": 42.5,
+            "trivy_images": 21.807692307692307,
+            "misconfig": 57.72727272727273,
+            "weighted_final": 39.55262237762238
+        }
+    },
+    "final_security_score": 60.44737762237762
+}
