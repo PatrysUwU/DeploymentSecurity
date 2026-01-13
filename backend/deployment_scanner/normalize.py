@@ -23,7 +23,7 @@ def normalize_scan_results(results: Dict[str, Any]) -> Dict[str, Any]:
 
 def _normalize_dependency_vulnerabilities(trivy_images: Dict[str, Any]):
     """
-    Dodaje after_normalizing do każdej podatności w zależnościach z Trivy Image Scans
+    Dodaje after_normalizing do każdej podatności w zależnościach
     CVSS z NVD * 10 * 0.4
     """
     for image_name, image_data in trivy_images.items():
@@ -47,7 +47,9 @@ def _normalize_dependency_vulnerabilities(trivy_images: Dict[str, Any]):
 
 
 def _normalize_infrastructure_config(trivy_misconfig: Dict[str, Any]):
-
+    """
+    Dodaje after_normalizing do każdej podatności w konfiguracji infrastruktury na podstawie severity
+    """
     misconfig_results = trivy_misconfig.get("results", [])
 
     for target in misconfig_results:
@@ -70,6 +72,7 @@ def _normalize_infrastructure_config(trivy_misconfig: Dict[str, Any]):
 
 
 def _normalize_sast_issues(bandit_results: Dict[str, Any]):
+    """Dodaje after_normalizing do każdej podatności SAST w kodzie zrodlowym na podstawie severity"""
 
     sast_results = bandit_results.get("results", [])
 

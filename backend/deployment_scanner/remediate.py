@@ -38,6 +38,7 @@ def _remediate_bandit(scan_results, proj_path, remediated_dir):
             if vuln["VulnerabilityID"] in HANDLED_VULNERABILITIES_BANDIT:
                 file_contents = _bandit_vulnerability_controller(vuln, file_contents)
 
+        # Save last file
         if processed_file is not None:
             output_path = os.path.join(remediated_dir, os.path.basename(processed_file))
             with open(output_path, "w") as f:
@@ -72,6 +73,7 @@ def _remediate_docker_compose(scan_results, proj_path, remediated_dir):
             if vuln["id"] in HANDLED_VULNERABILITIES_DOCKER_COMPOSE_SECURITY:
                 file_contents = _docker_compose_security_controller(vuln, file_contents)
 
+        # Save last file
         if processed_file is not None:
             output_path = os.path.join(remediated_dir, os.path.basename(processed_file))
             with open(output_path, "w") as f:

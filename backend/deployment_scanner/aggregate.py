@@ -233,6 +233,9 @@ def _get_dockerfile_path(
 def _extract_base_image_from_dockerfile(
     dockerfile_path: Optional[Path],
 ) -> Optional[str]:
+    """
+    Wyodrębnia obraz bazowy z Dockerfile
+    """
 
     if not dockerfile_path or not dockerfile_path.exists():
         return None

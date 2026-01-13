@@ -272,7 +272,6 @@ class DockerComposeScanner:
         return {}
 
     def _is_code_path(self, path: str) -> bool:
-        """Sprawdza czy ścieżka prawdopodobnie zawiera kod"""
         code_indicators = [
             "/app",
             "/src",
@@ -461,6 +460,7 @@ class DockerComposeScanner:
     def _analyze_security_issues(
         self, service_info: ServiceInfo, config: Dict[str, Any]
     ):
+        #Flaga dla podatności związanych z uruchomieniem kontenera w trybie root
         root_critical_flag = False
         if config.get("privileged", False):
             root_critical_flag = True

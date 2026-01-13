@@ -48,6 +48,7 @@ def _check_for_open_ports(container_config: Dict[str, Any]) -> bool:
 def _add_vulnerability_context(
     vuln: Dict[str, Any], has_open_ports: bool, image_name: str
 ):
+    """Jeśli obraz ma otwarte porty, to waga podatności sie zmniejsza"""
 
     context_wage = 1.0
 
